@@ -1,0 +1,19 @@
+<div class="nav-bar-container">
+  <div class="site-name-container">
+    <span>Weather App</span>
+  </div>
+  <div class="btns-container">
+    <button
+      mat-button
+      routerLink="weather"
+      [ngClass]="{'active': (selectedMenu$ | async) === 'weather'}"
+      (click)="onMenuItemClick('weather')"
+    >Home</button>
+    <button
+      mat-button
+      routerLink="favorites"
+      [ngClass]="{'active': (selectedMenu$ | async) === 'favorites'}"
+      (click)="onMenuItemClick('favorites')"
+    >Favorites</button>
+  </div>
+</div>

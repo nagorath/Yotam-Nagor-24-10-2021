@@ -1,4 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+//Imports
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+// Global colors consts
+$app-medium-blue: #3f51b5;
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Heebo', sans-serif; }
+
+*{
+  font-family: 'Heebo', sans-serif;
+  box-sizing: border-box;
+  direction: ltr;
+}
+
+.nav-bar-container{
+  .btns-container{
+    .mat-button-wrapper{
+      color: white!important;
+      font-weight: 400;
+    }
+    .active{
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
