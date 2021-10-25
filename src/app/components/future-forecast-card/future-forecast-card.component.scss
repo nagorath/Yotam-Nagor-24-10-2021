@@ -1,0 +1,11 @@
+.future-forecast-card-container{
+  height: 250px;
+  width: 175px;
+  padding: 20px;
+}
+
+@media (max-width: 450px) {
+  app-future-forecast-card{
+    margin-right: 0px!important;
+  }
+}

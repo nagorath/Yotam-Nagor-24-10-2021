@@ -7,13 +7,13 @@
       mat-button
       routerLink="weather"
       [ngClass]="{'active': (selectedMenu$ | async) === 'weather'}"
-      (click)="onMenuItemClick('weather')"
+      (click)="onMenuSelect('weather')"
     >Home</button>
     <button
       mat-button
       routerLink="favorites"
       [ngClass]="{'active': (selectedMenu$ | async) === 'favorites'}"
-      (click)="onMenuItemClick('favorites')"
+      (click)="onMenuSelect('favorites')"
     >Favorites</button>
   </div>
 </div>

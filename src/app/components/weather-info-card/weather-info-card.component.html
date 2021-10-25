@@ -1,0 +1,26 @@
+<div class="card-wrapper card-design">
+  <div class="card-header-container">
+    <div class="city-info-container">
+      <div class="weather-img-container">
+        <span>{{currentCityData?.WeatherIcon}}</span>
+      </div>
+      <div class="city-temp-contianer">
+        <span>{{currentCityName$ | async}}</span>
+        <span>{{currentCityData?.Temperature.Metric.Value}}</span>
+      </div>
+    </div>
+    <div class="fav-btn-container">
+      <span>LOVE</span>
+    </div>
+  </div>
+  <div class="card-content-container">
+    <div class="weather-details-text-container">
+      <span>{{currentCityData?.WeatherText}}</span>
+    </div>
+    <div class="future-days-forecast-container">
+      <div *ngFor="let forecast of futureForecastData">
+        <app-future-forecast-card [cardData]="forecast"></app-future-forecast-card>
+      </div>
+    </div>
+  </div>
+</div>

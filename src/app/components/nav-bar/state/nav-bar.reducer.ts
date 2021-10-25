@@ -1,8 +1,8 @@
-import {createAction, createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
 import * as NavbarActions from './nav-bar.actions';
 
 export interface State {
-  products: NavBarState;
+  navbar: NavBarState;
 }
 
 export interface NavBarState {

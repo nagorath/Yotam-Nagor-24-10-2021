@@ -1,1 +1,19 @@
-<p>weather-info-page works!</p>
+<div class="weather-info-page-container">
+<!--  <button (click)="test()">CLICK</button>-->
+  <div class="search-input-cpntainer">
+    <form>
+      <mat-form-field appearance="fill" class="auto-complete-container">
+        <mat-label>Search Location</mat-label>
+        <input type="text" matInput [formControl]="autocompleteFormControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onCitySelect(city)">
+            {{city.LocalizedName}}, {{city.Country.LocalizedName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="weather-info-container">
+    <app-weather-info-card></app-weather-info-card>
+  </div>
+</div>

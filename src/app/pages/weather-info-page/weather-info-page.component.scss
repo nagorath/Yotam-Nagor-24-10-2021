@@ -1,0 +1,24 @@
+.weather-info-page-container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  //padding: 50px 0;
+  .search-input-cpntainer{
+    margin-bottom: 50px;
+    padding-top: 50px;
+    .auto-complete-container{
+      max-width: 400px;
+      min-width: 350px;
+    }
+  }
+  .weather-info-container{
+    width: 100%;
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 700px) {
+  .weather-info-container{
+    padding: 0 20px!important;
+  }
+}
