@@ -17,5 +17,6 @@ export const setCurrentCityFutureForecast = createAction(
 );
 
 export const toggleIsCelsius = createAction(
-  'TOGGLE_IS_CELSIUS'
+  'TOGGLE_IS_CELSIUS',
+  props<{isCelsius: boolean}>()
 );

@@ -1,1 +1,14 @@
-<p>favorites-page works!</p>
+<div class="favorites-page-container">
+  <div class="title-container">
+    <h1>Favorites</h1>
+  </div>
+  <div class="is-celsius-container">
+    <span (click)="toggleIsCelsius(true)" [ngClass]="{'active': (isCelsius$ | async)}">°C</span>
+    <span (click)="toggleIsCelsius(false)" [ngClass]="{'active': !(isCelsius$ | async)}">°F</span>
+  </div>
+  <div class="favorite-cities-container">
+    <div *ngFor="let city of favoriteCities">
+      <app-favorite-city-card [cityId]="city.id" [cityName]="city.name"></app-favorite-city-card>
+    </div>
+  </div>
+</div>

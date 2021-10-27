@@ -1,6 +1,7 @@
 .card-wrapper{
   min-height: 500px;
   min-width: 300px;
+  margin-bottom: 100px;
   .card-header-container{
     width: 100%;
     height: 100px;
@@ -10,8 +11,11 @@
       display: flex;
       font-size: 20px;
       .weather-img-container{
-        height: 100%;
+        //height: 100%;
         width: 100px;
+        img {
+
+        }
       }
       .city-temp-contianer{
         height: 100%;
@@ -19,31 +23,37 @@
         flex-direction: column;
       }
     }
-    .fav-btn-container{
-
+    .card-btns-container{
+      span{
+        margin-left: 10px;
+        font-size: 22px;
+        cursor: pointer;
+        &.active{
+          font-weight: 700;
+        }
+      }
     }
   }
   .card-content-container{
     .weather-details-text-container{
       width: 100%;
-      background-color: #3f51b5;
       text-align: center;
       font-size: 40px;
       font-weight: 500;
       display: flex;
       flex-direction: column;
+      height: 100px;
       //margin-bottom: 30px;
     }
     .future-days-forecast-container {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
       app-future-forecast-card{
-        margin-right: 40px;
-        margin-bottom: 40px;
-        &:last-child{
-          margin-right: 0px;
+        //margin-right: 40px!important;
+        &:first-child{
+          //margin-bottom: 0px!important;
         }
       }
     }

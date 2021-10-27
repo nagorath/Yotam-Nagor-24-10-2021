@@ -6,7 +6,8 @@ import {FavoritesPageComponent} from './pages/favorites-page/favorites-page.comp
 const routes: Routes = [
   {
     path: '',
-    component: WeatherInfoPageComponent
+    redirectTo: 'weather',
+    pathMatch: 'full'
   },
   {
     path: 'weather',

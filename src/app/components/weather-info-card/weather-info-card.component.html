@@ -1,16 +1,20 @@
-<div class="card-wrapper card-design">
+<div class="card-wrapper card-design" *ngIf="currentCityData">
   <div class="card-header-container">
     <div class="city-info-container">
       <div class="weather-img-container">
-        <span>{{currentCityData?.WeatherIcon}}</span>
+        <img [src]="currentWeatherIcon">
       </div>
       <div class="city-temp-contianer">
         <span>{{currentCityName$ | async}}</span>
-        <span>{{currentCityData?.Temperature.Metric.Value}}</span>
+<!--        <span>{{(isCelsius$ | async) ? currentCityData?.Temperature.Metric.Value : currentCityData?.Temperature.Imperial.Value}}</span>-->
+        <span *ngIf="(isCelsius$ | async)">{{currentCityData?.Temperature.Metric.Value}}°C</span>
+        <span *ngIf="!(isCelsius$ | async)">{{currentCityData?.Temperature.Imperial.Value}}°F</span>
       </div>
     </div>
-    <div class="fav-btn-container">
-      <span>LOVE</span>
+    <div class="card-btns-container">
+      <span (click)="toggleIsCelsius(true)" [ngClass]="{'active': (isCelsius$ | async)}">°C</span>
+      <span (click)="toggleIsCelsius(false)" [ngClass]="{'active': !(isCelsius$ | async)}">°F</span>
+      <span (click)="toggleCityAsFavorite(currentCityData)" [ngClass]="{'active': isSetAsFavorite}">LOVE</span>
     </div>
   </div>
   <div class="card-content-container">

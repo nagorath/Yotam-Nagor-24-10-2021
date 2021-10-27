@@ -17,6 +17,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { WeatherInfoPageComponent } from './pages/weather-info-page/weather-info-page.component';
 import { FavoritesPageComponent } from './pages/favorites-page/favorites-page.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { WeatherInfoCardComponent } from './components/weather-info-card/weather-info-card.component';
+import { FutureForecastCardComponent } from './components/future-forecast-card/future-forecast-card.component';
+import { FavoriteCityCardComponent } from './components/favorite-city-card/favorite-city-card.component';
 
 // Material Imports
 import { MatIconModule } from '@angular/material/icon';
@@ -25,18 +28,12 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
-
-
-
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 // Reducers
 import {navbarReducer} from './components/nav-bar/state/nav-bar.reducer';
 import {weatherInfoReducer} from './pages/weather-info-page/state/weather-info.reducer';
-import { WeatherInfoCardComponent } from './components/weather-info-card/weather-info-card.component';
-import { FutureForecastCardComponent } from './components/future-forecast-card/future-forecast-card.component';
-import { FavoriteCityCardComponent } from './components/favorite-city-card/favorite-city-card.component';
+import {FavoritesReducer} from './pages/favorites-page/state/favorites-reducer';
 
 
 @NgModule({
@@ -52,7 +49,7 @@ import { FavoriteCityCardComponent } from './components/favorite-city-card/favor
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({navbar: navbarReducer, weatherInfo: weatherInfoReducer}, {}),
+    StoreModule.forRoot({navbar: navbarReducer, weatherInfo: weatherInfoReducer, favorites: FavoritesReducer}, {}),
     BrowserAnimationsModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument(
@@ -68,7 +65,7 @@ import { FavoriteCityCardComponent } from './components/favorite-city-card/favor
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatGridListModule
+    MatSnackBarModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy}

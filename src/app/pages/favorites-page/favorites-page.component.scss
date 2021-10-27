@@ -1,0 +1,34 @@
+.favorites-page-container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 100px;
+  .title-container{
+    margin-bottom: 20px;
+  }
+  .is-celsius-container{
+    width: 100%;
+    text-align: end;
+    span{
+      margin-left: 10px;
+      font-size: 22px;
+      cursor: pointer;
+      &.active{
+        font-weight: 700;
+      }
+    }
+  }
+  .favorite-cities-container{
+    min-width: 100%;
+    padding: 0 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 450px) {
+  favorite-cities-container{
+    justify-content: center;
+  }
+}

@@ -16,165 +16,11 @@ export interface WeatherInfoState {
 
 const InitialState: WeatherInfoState = {
   accuWeatherApiKey: 'YKGOoUemZrJrt95lcZ1yFu4rGgwsJzBA',
+  // accuWeatherApiKey: 'zD1dekmuXjAc1vvjRgcLuVbikuFDoHcx',
+  // accuWeatherApiKey: 'SsfxMOvwzTppvfMpu4GtCk8ENs3pSAgm',
   currentCityData: null,
   currentCityName: '',
-  futureForecast: [
-    {
-      Date: '2021-10-25T07:00:00+03:30',
-      EpochDate: 1635132600,
-      Temperature: {
-        Minimum: {
-          Value: 50,
-          Unit: 'F',
-          UnitType: 18
-        },
-        Maximum: {
-          Value: 68,
-          Unit: 'F',
-          UnitType: 18
-        }
-      },
-      Day: {
-        Icon: 1,
-        IconPhrase: 'Sunny',
-        HasPrecipitation: false
-      },
-      Night: {
-        Icon: 33,
-        IconPhrase: 'Clear',
-        HasPrecipitation: false
-      },
-      Sources: [
-        'AccuWeather'
-      ],
-      MobileLink: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us',
-      Link: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us'
-    },
-    {
-      Date: '2021-10-25T07:00:00+03:30',
-      EpochDate: 1635132600,
-      Temperature: {
-        Minimum: {
-          Value: 50,
-          Unit: 'F',
-          UnitType: 18
-        },
-        Maximum: {
-          Value: 68,
-          Unit: 'F',
-          UnitType: 18
-        }
-      },
-      Day: {
-        Icon: 1,
-        IconPhrase: 'Sunny',
-        HasPrecipitation: false
-      },
-      Night: {
-        Icon: 33,
-        IconPhrase: 'Clear',
-        HasPrecipitation: false
-      },
-      Sources: [
-        'AccuWeather'
-      ],
-      MobileLink: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us',
-      Link: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us'
-    },
-    {
-      Date: '2021-10-25T07:00:00+03:30',
-      EpochDate: 1635132600,
-      Temperature: {
-        Minimum: {
-          Value: 50,
-          Unit: 'F',
-          UnitType: 18
-        },
-        Maximum: {
-          Value: 68,
-          Unit: 'F',
-          UnitType: 18
-        }
-      },
-      Day: {
-        Icon: 1,
-        IconPhrase: 'Sunny',
-        HasPrecipitation: false
-      },
-      Night: {
-        Icon: 33,
-        IconPhrase: 'Clear',
-        HasPrecipitation: false
-      },
-      Sources: [
-        'AccuWeather'
-      ],
-      MobileLink: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us',
-      Link: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us'
-    },
-    {
-      Date: '2021-10-25T07:00:00+03:30',
-      EpochDate: 1635132600,
-      Temperature: {
-        Minimum: {
-          Value: 50,
-          Unit: 'F',
-          UnitType: 18
-        },
-        Maximum: {
-          Value: 68,
-          Unit: 'F',
-          UnitType: 18
-        }
-      },
-      Day: {
-        Icon: 1,
-        IconPhrase: 'Sunny',
-        HasPrecipitation: false
-      },
-      Night: {
-        Icon: 33,
-        IconPhrase: 'Clear',
-        HasPrecipitation: false
-      },
-      Sources: [
-        'AccuWeather'
-      ],
-      MobileLink: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us',
-      Link: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us'
-    },
-    {
-      Date: '2021-10-25T07:00:00+03:30',
-      EpochDate: 1635132600,
-      Temperature: {
-        Minimum: {
-          Value: 50,
-          Unit: 'F',
-          UnitType: 18
-        },
-        Maximum: {
-          Value: 68,
-          Unit: 'F',
-          UnitType: 18
-        }
-      },
-      Day: {
-        Icon: 1,
-        IconPhrase: 'Sunny',
-        HasPrecipitation: false
-      },
-      Night: {
-        Icon: 33,
-        IconPhrase: 'Clear',
-        HasPrecipitation: false
-      },
-      Sources: [
-        'AccuWeather'
-      ],
-      MobileLink: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us',
-      Link: 'http://www.accuweather.com/en/ir/tehran/210841/daily-weather-forecast/210841?day=1&lang=en-us'
-    },
-  ],
+  futureForecast: null,
   isCelsius: true
 };
 
@@ -225,10 +71,10 @@ export const weatherInfoReducer = createReducer<WeatherInfoState>(
       futureForecast: action.futureForecast
     };
   }),
-  on(WeatherInfoActions.toggleIsCelsius, (state): WeatherInfoState => {
+  on(WeatherInfoActions.toggleIsCelsius, (state, action): WeatherInfoState => {
     return {
       ...state,
-      isCelsius: !state.isCelsius
+      isCelsius: action.isCelsius
     };
   })
 );

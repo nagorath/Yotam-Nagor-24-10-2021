@@ -12,7 +12,6 @@ import {Location} from '@angular/common';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  menus: string[] = ['weather', 'favorites'];
   selectedMenu$: Observable<string>;
   constructor(private store: Store<State>, private location: Location, private router: Router) { }
 
@@ -21,6 +20,7 @@ export class NavBarComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         const currentRoute = event.url.substring(1);
+        console.log(currentRoute);
         this.store.dispatch(NavBarActions.setSelectedMenu({selectedMenu: currentRoute}));
       }
     });

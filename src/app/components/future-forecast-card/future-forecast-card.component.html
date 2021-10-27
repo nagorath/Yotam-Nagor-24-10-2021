@@ -1,3 +1,5 @@
 <div class="future-forecast-card-container card-design">
-  {{cardData.Date}}
+  <span>{{getDayName()}}</span>
+  <img [src]="imgSrc">
+  <span>{{tempMin}}{{(isCelsius$ | async) ? '°C' : 'F°'}} / {{tempMax}}{{(isCelsius$ | async) ? '°C' : '°F'}}</span>
 </div>

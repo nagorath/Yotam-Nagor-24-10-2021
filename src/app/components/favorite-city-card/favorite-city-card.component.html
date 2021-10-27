@@ -1,1 +1,6 @@
-<p>favorite-city-card works!</p>
+<div class="favorite-city-card-container card-design" (click)="onCardClick()">
+  <span>{{cityName}}</span>
+  <img [src]="imgSrc">
+  <span>{{(isCelsius$ | async) ? cardData?.Temperature.Metric.Value : cardData?.Temperature.Imperial.Value}}{{(isCelsius$ | async) ? '°C' : 'F°'}}</span>
+</div>
+
