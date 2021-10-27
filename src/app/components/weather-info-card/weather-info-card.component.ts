@@ -50,14 +50,16 @@ export class WeatherInfoCardComponent implements OnInit, OnDestroy {
       this.currentCityData = data;
       this.favoriteCitiesSub = this.favStore.select(getFavoriteCities).subscribe((favoriteCitiesArr: FavoriteCity[]) => {
         let isCityFound = false;
-        favoriteCitiesArr.forEach(city => {
-          if (this.currentCityData?.Key === city.id) {
-            this.isSetAsFavorite = true;
-            isCityFound = true;
-          } else if (!isCityFound && this.currentCityData?.Key !== city.id) {
-            this.isSetAsFavorite = false;
-          }
-        });
+        if (favoriteCitiesArr.length) {
+          favoriteCitiesArr.forEach(city => {
+            if (this.currentCityData?.Key === city.id) {
+              this.isSetAsFavorite = true;
+              isCityFound = true;
+            } else if (!isCityFound && this.currentCityData?.Key !== city.id) {
+              this.isSetAsFavorite = false;
+            }
+          });
+        }
       });
       if (data && data.WeatherIcon) {
         this.getWeatherIcon(data.WeatherIcon);
@@ -120,7 +122,9 @@ export class WeatherInfoCardComponent implements OnInit, OnDestroy {
     };
     let tempFavCitiesArray = [];
     this.favStore.select(getFavoriteCities).subscribe(favoriteCitiesArr => {
-      return tempFavCitiesArray = [...favoriteCitiesArr];
+      if (favoriteCitiesArr.length) {
+        return tempFavCitiesArray = [...favoriteCitiesArr];
+      }
     });
     if (this.isSetAsFavorite) {
       tempFavCitiesArray = tempFavCitiesArray.filter(city => city.id !== cityObj.Key);
