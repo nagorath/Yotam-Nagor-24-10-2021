@@ -24,9 +24,10 @@ export const getFavoriteCities = createSelector(
 export const FavoritesReducer = createReducer<FavoritesState>(
   InitialState,
   on(FavoritesActions.setNewFavoriteCity, (state, action): FavoritesState => {
+    console.log(action.favoriteCity);
     return {
       ...state,
-      favoriteCities: [...action.favoriteCity]
+      favoriteCities: action.favoriteCity
     };
   })
 );
