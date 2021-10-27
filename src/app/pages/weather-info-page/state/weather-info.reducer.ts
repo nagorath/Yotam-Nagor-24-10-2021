@@ -2,7 +2,7 @@ import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/st
 import * as WeatherInfoActions from './weather-info.actions';
 import {CurrentCityData, FutureForecast} from '../classes/weather-info.classes';
 
-export interface State {
+export interface WeatherState {
   weatherInfo: WeatherInfoState;
 }
 
@@ -15,9 +15,10 @@ export interface WeatherInfoState {
 }
 
 const InitialState: WeatherInfoState = {
-  accuWeatherApiKey: 'YKGOoUemZrJrt95lcZ1yFu4rGgwsJzBA',
+  // accuWeatherApiKey: 'YKGOoUemZrJrt95lcZ1yFu4rGgwsJzBA',
   // accuWeatherApiKey: 'zD1dekmuXjAc1vvjRgcLuVbikuFDoHcx',
   // accuWeatherApiKey: 'SsfxMOvwzTppvfMpu4GtCk8ENs3pSAgm',
+  accuWeatherApiKey: 'S3yt53eqNHH8U1gDCrHccl2SxW7RaBsx',
   currentCityData: null,
   currentCityName: '',
   futureForecast: null,

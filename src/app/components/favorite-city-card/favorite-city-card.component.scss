@@ -24,6 +24,11 @@
     &:active{
       background-color: #688eff;
     }
+    &.dark-mode{
+      &:hover{
+        background-color: #ffc6d8;
+      }
+    }
   }
 }
 

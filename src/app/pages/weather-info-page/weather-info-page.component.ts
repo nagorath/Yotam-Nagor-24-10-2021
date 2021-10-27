@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {Form, FormControl, FormGroup} from '@angular/forms';
-import {Observable, Subscriber, Subscription} from 'rxjs';
-import {debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, tap} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
-import {City, CurrentCityData, FutureForecast} from './classes/weather-info.classes';
-import {getAccuWeatherApiKey, getCurrentCityData, getIsCelsius, State} from './state/weather-info.reducer';
+import { Component , OnInit } from '@angular/core';
+import { FormControl , FormGroup } from '@angular/forms';
+import { Observable , Subscription } from 'rxjs';
+import {debounceTime, filter, map, switchMap, tap} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { City , CurrentCityData } from './classes/weather-info.classes';
+import { getAccuWeatherApiKey , getCurrentCityData , getIsCelsius , WeatherState } from './state/weather-info.reducer';
 import * as WeatherInfoActions from './state/weather-info.actions';
-import {Store} from '@ngrx/store';
-import {DataService} from '../../services/data/data.service';
-import {UtilsService} from '../../services/utils/utils.service';
-import {error} from 'protractor';
-export interface User {
-  name: string;
-}
+import { Store } from '@ngrx/store';
+import { DataService } from '../../services/data/data.service';
+import { UtilsService } from '../../services/utils/utils.service';
+import { AppGlobalState , getIsDarkMode } from '../../app-state/app-state.reducer';
+
 @Component({
   selector: 'app-weather-info-page',
   templateUrl: './weather-info-page.component.html',
@@ -26,28 +24,23 @@ export class WeatherInfoPageComponent implements OnInit {
   isLoading: boolean;
   searchFromGroup: FormGroup;
   currentCitySub: Subscription = new Subscription();
+  isDarkMode$: Observable<boolean>;
   constructor(
     private http: HttpClient,
-    private store: Store<State>,
+    private store: Store<WeatherState>,
     private dataService: DataService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private globalStore: Store<AppGlobalState>
   ) {
 
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.isDarkMode$ = this.globalStore.select(getIsDarkMode);
+    this.checkIfDarkMode();
     this.apiKey$ = this.store.select(getAccuWeatherApiKey);
     this.isCelsius$ = this.store.select(getIsCelsius);
-    // this.filteredCities = this.autocompleteFormControl.valueChanges
-    //   .pipe(
-    //     startWith(''),
-    //     debounceTime(400),
-    //     distinctUntilChanged(),
-    //     switchMap(val => {
-    //      return this.getCities(val || '');
-    //     }),
-    //   );
     this.searchFromGroup.get('citySearch').valueChanges.pipe(
       debounceTime(300),
       filter(val => typeof val === 'string'),
@@ -78,13 +71,25 @@ export class WeatherInfoPageComponent implements OnInit {
         }, {enableHighAccuracy: true});
       }
     });
-
   }
 
   initForm(): void {
     this.searchFromGroup = new FormGroup({
       citySearch: new FormControl('')
     });
+  }
+
+  checkIfDarkMode(): void {
+    let isDarkMode;
+    this.isDarkMode$.subscribe(isDarkModeBol => {
+      isDarkMode = isDarkModeBol;
+    });
+    const autoCompleteEl = document.querySelector('.mat-form-field-flex');
+    if (isDarkMode) {
+      autoCompleteEl.classList.add('dark-mode');
+    } else {
+      autoCompleteEl.classList.remove('dark-mode');
+    }
   }
 
   getCityByCurrentLocation(lat: number, lon: number): void {
@@ -101,7 +106,7 @@ export class WeatherInfoPageComponent implements OnInit {
     });
   }
 
-  getCities(val: string): Observable<any> {
+  getCities(val: string): Observable<City[]> {
     let apiKey = '';
     this.apiKey$.subscribe(key => {
       apiKey = key;

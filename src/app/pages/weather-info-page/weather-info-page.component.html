@@ -1,9 +1,9 @@
-<div class="weather-info-page-container">
+<div class="weather-info-page-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">
 <!--  <button (click)="test()">CLICK</button>-->
   <div class="search-input-cpntainer">
     <form [formGroup]="searchFromGroup">
       <mat-form-field appearance="fill" class="auto-complete-container">
-        <mat-label>Search Location</mat-label>
+        <mat-label [ngClass]="{'dark-mode': (isDarkMode$ | async)}">Search Location</mat-label>
         <input type="text" matInput formControlName="citySearch" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let city of citiesArray" [value]="city" (onSelectionChange)="onCitySelect(city.Key, city.LocalizedName)">

@@ -1,9 +1,10 @@
-<div class="favorites-page-container">
+<div class="favorites-page-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">
   <div class="title-container">
-    <h1>Favorites</h1>
+    <h1 [ngClass]="{'dark-mode': (isDarkMode$ | async)}">Favorites</h1>
   </div>
-  <div class="is-celsius-container">
+  <div class="is-celsius-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">
     <span (click)="toggleIsCelsius(true)" [ngClass]="{'active': (isCelsius$ | async)}">°C</span>
+    <span>|</span>
     <span (click)="toggleIsCelsius(false)" [ngClass]="{'active': !(isCelsius$ | async)}">°F</span>
   </div>
   <div class="favorite-cities-container">

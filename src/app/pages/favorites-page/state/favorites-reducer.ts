@@ -1,6 +1,6 @@
-import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+import { createFeatureSelector , createReducer , createSelector , on } from '@ngrx/store';
 import * as FavoritesActions from './favorites-actions';
-import {FavoriteCity} from '../classes/favorites.classes';
+import { FavoriteCity } from '../classes/favorites.classes';
 
 export interface FavState {
   favorites: FavoritesState;
@@ -11,13 +11,7 @@ export interface FavoritesState {
 }
 
 const InitialState: FavoritesState = {
-  favoriteCities: [
-    {
-    name: 'Tel Aviv',
-    id: '215854',
-    currentTemp: 22
-    }
-  ]
+  favoriteCities: []
 };
 
 const getFavoritesState = createFeatureSelector<FavoritesState>('favorites');

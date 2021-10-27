@@ -1,20 +1,21 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {CurrentCityData, FutureForecast, iconsArray} from '../../pages/weather-info-page/classes/weather-info.classes';
-import {Store} from '@ngrx/store';
+import { Component , OnDestroy , OnInit } from '@angular/core';
+import { Observable , Subscription } from 'rxjs';
+import { CurrentCityData , FutureForecast , iconsArray } from '../../pages/weather-info-page/classes/weather-info.classes';
+import { Store } from '@ngrx/store';
 import {
   getCurrentCityData,
   getCurrentCityName,
   getFutureForecast,
   getIsCelsius,
-  State
+  WeatherState
 } from '../../pages/weather-info-page/state/weather-info.reducer';
 import * as WeatherInfoActions from '../../pages/weather-info-page/state/weather-info.actions';
-import {FavoriteCity} from '../../pages/favorites-page/classes/favorites.classes';
-import {FavState, getFavoriteCities} from '../../pages/favorites-page/state/favorites-reducer';
-import {setNewFavoriteCity} from '../../pages/favorites-page/state/favorites-actions';
-import {UtilsService} from '../../services/utils/utils.service';
-import {setCurrentCityFutureForecast} from '../../pages/weather-info-page/state/weather-info.actions';
+import { FavoriteCity } from '../../pages/favorites-page/classes/favorites.classes';
+import { FavState , getFavoriteCities } from '../../pages/favorites-page/state/favorites-reducer';
+import { setNewFavoriteCity } from '../../pages/favorites-page/state/favorites-actions';
+import { UtilsService } from '../../services/utils/utils.service';
+import { setCurrentCityFutureForecast } from '../../pages/weather-info-page/state/weather-info.actions';
+import { AppGlobalState , getIsDarkMode } from '../../app-state/app-state.reducer';
 
 @Component({
   selector: 'app-weather-info-card',
@@ -32,13 +33,16 @@ export class WeatherInfoCardComponent implements OnInit, OnDestroy {
   currentWeatherIcon: string;
   favoriteCitiesSub: Subscription = new Subscription();
   isSetAsFavorite: boolean;
+  isDarkMode$: Observable<boolean>;
   constructor(
-    private store: Store<State>,
+    private store: Store<WeatherState>,
     private favStore: Store<FavState>,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private globalStore: Store<AppGlobalState>
   ) {}
 
   ngOnInit(): void {
+    this.isDarkMode$ = this.globalStore.select(getIsDarkMode);
     this.currentCityName$ = this.store.select(getCurrentCityName);
     this.isCelsius$ = this.store.select(getIsCelsius);
     this.futureForecast$ = this.store.select(getFutureForecast);
@@ -87,19 +91,19 @@ export class WeatherInfoCardComponent implements OnInit, OnDestroy {
     });
     this.futureForecastData.map(futureForecast => {
       const tempFutureForecast = {...futureForecast};
-      if (isCelsius) {
+      if (isCelsius && tempFutureForecast.Temperature.Maximum.UnitType !== 17) {
         tempFutureForecast.Temperature.Maximum.Value = this.utilsService.parseFtoC(tempFutureForecast.Temperature.Maximum.Value);
         tempFutureForecast.Temperature.Minimum.Value = this.utilsService.parseFtoC(tempFutureForecast.Temperature.Minimum.Value);
-        tempFutureForecast.Temperature.Maximum.UnitType = 18;
-        tempFutureForecast.Temperature.Minimum.UnitType = 18;
+        tempFutureForecast.Temperature.Maximum.UnitType = 17;
+        tempFutureForecast.Temperature.Minimum.UnitType = 17;
         tempFutureForecast.Temperature.Minimum.Unit = 'C';
         tempFutureForecast.Temperature.Maximum.Unit = 'C';
         return tempFutureForecast;
-      } else if (!isCelsius) {
+      } else if (!isCelsius && tempFutureForecast.Temperature.Maximum.UnitType !== 18) {
         tempFutureForecast.Temperature.Maximum.Value = this.utilsService.parseCtoF(tempFutureForecast.Temperature.Maximum.Value);
         tempFutureForecast.Temperature.Minimum.Value = this.utilsService.parseCtoF(tempFutureForecast.Temperature.Minimum.Value);
-        tempFutureForecast.Temperature.Maximum.UnitType = 17;
-        tempFutureForecast.Temperature.Minimum.UnitType = 17;
+        tempFutureForecast.Temperature.Maximum.UnitType = 18;
+        tempFutureForecast.Temperature.Minimum.UnitType = 18;
         tempFutureForecast.Temperature.Minimum.Unit = 'F';
         tempFutureForecast.Temperature.Maximum.Unit = 'F';
         return tempFutureForecast;
@@ -125,7 +129,12 @@ export class WeatherInfoCardComponent implements OnInit, OnDestroy {
       tempFavCitiesArray.push(favoriteCityObj);
       this.isSetAsFavorite = true;
     }
+    this.setFavoriteCitiesToLocalHost(tempFavCitiesArray);
     this.favStore.dispatch(setNewFavoriteCity({favoriteCity: tempFavCitiesArray}));
+  }
+
+  setFavoriteCitiesToLocalHost(favoriteCitiesArray): void {
+    localStorage.setItem('favoriteCitiesArray', JSON.stringify(favoriteCitiesArray));
   }
 
   ngOnDestroy(): void {

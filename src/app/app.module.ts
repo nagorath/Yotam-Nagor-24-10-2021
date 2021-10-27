@@ -31,9 +31,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 // Reducers
-import {navbarReducer} from './components/nav-bar/state/nav-bar.reducer';
 import {weatherInfoReducer} from './pages/weather-info-page/state/weather-info.reducer';
 import {FavoritesReducer} from './pages/favorites-page/state/favorites-reducer';
+import {appStateReducer} from './app-state/app-state.reducer';
 
 
 @NgModule({
@@ -49,7 +49,7 @@ import {FavoritesReducer} from './pages/favorites-page/state/favorites-reducer';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({navbar: navbarReducer, weatherInfo: weatherInfoReducer, favorites: FavoritesReducer}, {}),
+    StoreModule.forRoot({appGlobalState: appStateReducer, weatherInfo: weatherInfoReducer, favorites: FavoritesReducer}, {}),
     BrowserAnimationsModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument(

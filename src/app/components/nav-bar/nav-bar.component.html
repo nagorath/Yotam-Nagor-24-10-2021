@@ -1,19 +1,25 @@
-<div class="nav-bar-container">
-  <div class="site-name-container">
-    <span>Weather App</span>
+<div class="nav-bar-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">
+  <div class="logo-container">
+    <img src="assets/logo-light-mode.png" *ngIf="!(isDarkMode$ | async)">
+    <img src="assets/logo-dark-mode.png" *ngIf="isDarkMode$ | async">
   </div>
   <div class="btns-container">
-    <button
-      mat-button
-      routerLink="weather"
-      [ngClass]="{'active': (selectedMenu$ | async) === 'weather'}"
-      (click)="onMenuSelect('weather')"
-    >Home</button>
-    <button
-      mat-button
-      routerLink="favorites"
-      [ngClass]="{'active': (selectedMenu$ | async) === 'favorites'}"
-      (click)="onMenuSelect('favorites')"
-    >Favorites</button>
+    <div class="dark-mode-btn-container">
+      <mat-icon [ngClass]="{'dark-mode': (isDarkMode$ | async)}" (click)="toggleDarkMode()">brightness_4</mat-icon>
+    </div>
+    <div class="routing-btns-container">
+      <button
+        mat-button
+        routerLink="weather"
+        [ngClass]="{'active': (selectedMenu$ | async) === 'weather'}"
+        (click)="onMenuSelect('weather')"
+      >Home</button>
+      <button
+        mat-button
+        routerLink="favorites"
+        [ngClass]="{'active': (selectedMenu$ | async) === 'favorites'}"
+        (click)="onMenuSelect('favorites')"
+      >Favorites</button>
+    </div>
   </div>
 </div>

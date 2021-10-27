@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  transition: ease-out 0.2s;
+  height: calc(100% - 48px);
+  &.dark-mode{
+    background-color: #303030;
+  }
   //padding: 50px 0;
   .search-input-cpntainer{
     margin-bottom: 50px;

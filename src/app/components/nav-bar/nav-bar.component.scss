@@ -1,15 +1,44 @@
-@import './src/styles';
 
 .nav-bar-container{
   height: 48px;
   width: 100vw;
-  background-color: $app-medium-blue;
+  background-color: #3f51b5;
   padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .site-name-container{
-    color: white;
-    font-size: 18px;
+  &.dark-mode{
+    background-color: #E91E63;
+  }
+  .logo-container{
+    display: flex;
+    justify-content: center;
+    img{
+      width: 250px;
+    }
+  }
+  .btns-container{
+    display: flex;
+    flex-direction: row;
+    .dark-mode-btn-container{
+      color: white;
+      margin-right: 18px;
+      margin-top: 3px;
+      mat-icon{
+        font-size: 30px;
+        cursor: pointer;
+        &.dark-mode{
+          color: #424242;
+        }
+      }
+    }
   }
 }
+
+@media (max-width: 500px) {
+  .nav-bar-container {
+    flex-direction: column;
+    height: 100px;
+    justify-content: center;
+  }
+  }

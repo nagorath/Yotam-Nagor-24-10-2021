@@ -1,20 +1,26 @@
-<div class="card-wrapper card-design" *ngIf="currentCityData">
+<div class="card-wrapper card-design" *ngIf="currentCityData" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">
   <div class="card-header-container">
     <div class="city-info-container">
       <div class="weather-img-container">
         <img [src]="currentWeatherIcon">
       </div>
       <div class="city-temp-contianer">
-        <span>{{currentCityName$ | async}}</span>
+        <div class="city-name-fav-container">
+          <span>{{currentCityName$ | async}}</span>
+          <mat-icon *ngIf="!isSetAsFavorite" class="favorite-border-icon" (click)="toggleCityAsFavorite(currentCityData)">favorite_border</mat-icon>
+          <mat-icon *ngIf="isSetAsFavorite" class="favorite-border-icon" (click)="toggleCityAsFavorite(currentCityData)">favorite</mat-icon>
+        </div>
 <!--        <span>{{(isCelsius$ | async) ? currentCityData?.Temperature.Metric.Value : currentCityData?.Temperature.Imperial.Value}}</span>-->
         <span *ngIf="(isCelsius$ | async)">{{currentCityData?.Temperature.Metric.Value}}°C</span>
         <span *ngIf="!(isCelsius$ | async)">{{currentCityData?.Temperature.Imperial.Value}}°F</span>
       </div>
     </div>
     <div class="card-btns-container">
-      <span (click)="toggleIsCelsius(true)" [ngClass]="{'active': (isCelsius$ | async)}">°C</span>
-      <span (click)="toggleIsCelsius(false)" [ngClass]="{'active': !(isCelsius$ | async)}">°F</span>
-      <span (click)="toggleCityAsFavorite(currentCityData)" [ngClass]="{'active': isSetAsFavorite}">LOVE</span>
+      <span class="unit-text" (click)="toggleIsCelsius(true)" [ngClass]="{'active': (isCelsius$ | async), 'dark-mode': (isDarkMode$ | async)}">°C</span>
+      <span>|</span>
+      <span class="unit-text" (click)="toggleIsCelsius(false)" [ngClass]="{'active': !(isCelsius$ | async), 'dark-mode': (isDarkMode$ | async)}">°F</span>
+<!--      <span>LOVE</span>-->
+
     </div>
   </div>
   <div class="card-content-container">

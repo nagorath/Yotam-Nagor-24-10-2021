@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {tap} from 'rxjs/operators';
-import {City, CurrentCityData, FutureForecast} from '../../pages/weather-info-page/classes/weather-info.classes';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { City , CurrentCityData , FutureForecast } from '../../pages/weather-info-page/classes/weather-info.classes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  opts = [];
   constructor(private http: HttpClient) { }
   getCitiesData(apiKey: string, filterValue: string): Observable<City[]> {
     const url = `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${filterValue}`;

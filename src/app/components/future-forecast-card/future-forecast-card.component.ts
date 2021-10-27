@@ -1,12 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FutureForecast} from '../../pages/weather-info-page/classes/weather-info.classes';
-import {getCurrentCityData, getIsCelsius} from '../../pages/weather-info-page/state/weather-info.reducer';
-import {iconsArray} from '../../pages/weather-info-page/classes/weather-info.classes';
+import { Component , Input , OnDestroy , OnInit } from '@angular/core';
+import { FutureForecast } from '../../pages/weather-info-page/classes/weather-info.classes';
+import { getCurrentCityData , getIsCelsius , WeatherState } from '../../pages/weather-info-page/state/weather-info.reducer';
+import { iconsArray } from '../../pages/weather-info-page/classes/weather-info.classes';
 import * as moment from 'moment';
-import {Store} from '@ngrx/store';
-import {State} from '../../pages/weather-info-page/state/weather-info.reducer';
-import {Observable, Subscription} from 'rxjs';
-import {distinctUntilChanged} from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Observable , Subscription } from 'rxjs';
+import { AppGlobalState , getIsDarkMode } from '../../app-state/app-state.reducer';
 
 @Component({
   selector: 'app-future-forecast-card',
@@ -21,17 +20,20 @@ export class FutureForecastCardComponent implements OnInit, OnDestroy{
   tempMin: number;
   tempMax: number;
   isCelsius$: Observable<boolean>;
+  isDarkMode$: Observable<boolean>;
 
-  constructor(private store: Store<State>) {}
+  constructor(
+    private store: Store<WeatherState>,
+    private globalStore: Store<AppGlobalState>
+  ) {}
 
   ngOnInit(): void {
+    this.isDarkMode$ = this.globalStore.select(getIsDarkMode);
     this.tempMin = Math.round(this.cardData.Temperature.Minimum.Value);
     this.tempMax = Math.round(this.cardData.Temperature.Maximum.Value);
     this.getWeatherIcon();
     this.isCelsius$ = this.store.select(getIsCelsius);
   }
-
-
 
   getDayName(): string {
     return moment(this.cardData.Date).format('dddd');
@@ -41,7 +43,6 @@ export class FutureForecastCardComponent implements OnInit, OnDestroy{
     this.store.select(getCurrentCityData).subscribe(data => {
       this.isDaytime = data.IsDayTime;
       const dayTimeIconNum = this.cardData.Day.Icon;
-      const nightTimeIconNum = this.cardData.Night.Icon;
       iconsArray.forEach(icon => {
         icon.iconNums.forEach(iconNum => {
           if (this.isDaytime && iconNum === dayTimeIconNum) {

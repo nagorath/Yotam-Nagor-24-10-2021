@@ -1,5 +1,5 @@
-import {createAction, props} from '@ngrx/store';
-import {CurrentCityData, FutureForecast} from '../classes/weather-info.classes';
+import { createAction , props } from '@ngrx/store';
+import { CurrentCityData , FutureForecast } from '../classes/weather-info.classes';
 
 export const setCurrentCityName = createAction(
   'SET_CURRENT_CITY_NAME',

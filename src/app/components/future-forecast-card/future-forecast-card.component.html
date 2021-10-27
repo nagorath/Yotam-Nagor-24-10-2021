@@ -1,4 +1,4 @@
-<div class="future-forecast-card-container card-design">
+<div class="future-forecast-card-container card-design" [ngClass]="{'dark-mode-forecast-card': (isDarkMode$ | async)}">
   <span>{{getDayName()}}</span>
   <img [src]="imgSrc">
   <span>{{tempMin}}{{(isCelsius$ | async) ? '°C' : 'F°'}} / {{tempMax}}{{(isCelsius$ | async) ? '°C' : '°F'}}</span>
