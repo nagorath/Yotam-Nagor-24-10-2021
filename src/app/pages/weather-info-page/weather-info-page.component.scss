@@ -9,16 +9,22 @@
   }
   //padding: 50px 0;
   .search-input-cpntainer{
-    margin-bottom: 50px;
-    padding-top: 50px;
+    //margin-bottom: 50px;
+    //padding-top: 50px;
+    padding: 50px 50px;
+    width: 100%;
     .auto-complete-container{
-      max-width: 400px;
-      min-width: 350px;
+      //max-width: 400px;
+      //min-width: 350px;
+      width: 100%;
     }
   }
   .weather-info-container{
     width: 100%;
     padding: 0 50px;
+    &.dark-mode{
+      background-color: #303030;
+    }
   }
 }
 

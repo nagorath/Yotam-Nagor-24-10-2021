@@ -5,14 +5,16 @@
         <img [src]="currentWeatherIcon">
       </div>
       <div class="city-temp-contianer">
+        <span>{{currentCityName$ | async}}</span>
+        <!--        <span>{{(isCelsius$ | async) ? currentCityData?.Temperature.Metric.Value : currentCityData?.Temperature.Imperial.Value}}</span>-->
+        <span *ngIf="(isCelsius$ | async)">{{currentCityData?.Temperature.Metric.Value}}°C</span>
+        <span *ngIf="!(isCelsius$ | async)">{{currentCityData?.Temperature.Imperial.Value}}°F</span>
+        <span>{{currentCityData?.WeatherText}}</span>
         <div class="city-name-fav-container">
-          <span>{{currentCityName$ | async}}</span>
           <mat-icon *ngIf="!isSetAsFavorite" class="favorite-border-icon" (click)="toggleCityAsFavorite(currentCityData)">favorite_border</mat-icon>
           <mat-icon *ngIf="isSetAsFavorite" class="favorite-border-icon" (click)="toggleCityAsFavorite(currentCityData)">favorite</mat-icon>
         </div>
-<!--        <span>{{(isCelsius$ | async) ? currentCityData?.Temperature.Metric.Value : currentCityData?.Temperature.Imperial.Value}}</span>-->
-        <span *ngIf="(isCelsius$ | async)">{{currentCityData?.Temperature.Metric.Value}}°C</span>
-        <span *ngIf="!(isCelsius$ | async)">{{currentCityData?.Temperature.Imperial.Value}}°F</span>
+
       </div>
     </div>
     <div class="card-btns-container">
@@ -25,7 +27,6 @@
   </div>
   <div class="card-content-container">
     <div class="weather-details-text-container">
-      <span>{{currentCityData?.WeatherText}}</span>
     </div>
     <div class="future-days-forecast-container">
       <div *ngFor="let forecast of futureForecastData">

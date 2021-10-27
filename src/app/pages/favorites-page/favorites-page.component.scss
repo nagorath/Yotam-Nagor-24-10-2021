@@ -30,6 +30,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    text-align: center;
+    .no-fav-text{
+      text-align: center;
+      font-size: 28px;
+      font-weight: 100;
+    }
   }
 }
 

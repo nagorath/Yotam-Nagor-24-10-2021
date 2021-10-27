@@ -13,7 +13,7 @@
       </mat-form-field>
     </form>
   </div>
-  <div class="weather-info-container">
+  <div class="weather-info-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">
     <app-weather-info-card></app-weather-info-card>
   </div>
 </div>
