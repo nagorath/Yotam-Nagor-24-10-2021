@@ -16,10 +16,11 @@ export interface WeatherInfoState {
 
 const InitialState: WeatherInfoState = {
   // accuWeatherApiKey: 'YKGOoUemZrJrt95lcZ1yFu4rGgwsJzBA',
+  accuWeatherApiKey: 'pGRAM5ufgbzxjXRrI7IPlHelEKxBUZEc',
   // accuWeatherApiKey: 'zD1dekmuXjAc1vvjRgcLuVbikuFDoHcx',
   // accuWeatherApiKey: 'SsfxMOvwzTppvfMpu4GtCk8ENs3pSAgm',
   // accuWeatherApiKey: 'S3yt53eqNHH8U1gDCrHccl2SxW7RaBsx',
-  accuWeatherApiKey: 'FtJ5cNeuBH16t8ZoS57bI2JhKzRwRoxH',
+  // accuWeatherApiKey: 'FtJ5cNeuBH16t8ZoS57bI2JhKzRwRoxH',
   currentCityData: null,
   currentCityName: '',
   futureForecast: null,
