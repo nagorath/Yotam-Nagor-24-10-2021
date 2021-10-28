@@ -11,6 +11,7 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <span *ngIf="searchFromGroup.get('citySearch').invalid" class="invalid-input-text">*English characters only</span>
     </form>
   </div>
   <div class="weather-info-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">

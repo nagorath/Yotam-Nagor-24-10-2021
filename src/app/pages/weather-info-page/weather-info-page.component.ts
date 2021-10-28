@@ -1,5 +1,5 @@
 import { Component , OnInit } from '@angular/core';
-import { FormControl , FormGroup } from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { Observable , Subscription } from 'rxjs';
 import {debounceTime, filter, map, switchMap, tap} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -43,7 +43,7 @@ export class WeatherInfoPageComponent implements OnInit {
     this.isCelsius$ = this.store.select(getIsCelsius);
     this.searchFromGroup.get('citySearch').valueChanges.pipe(
       debounceTime(300),
-      filter(val => typeof val === 'string'),
+      filter(val => val && typeof val === 'string' && this.searchFromGroup.get('citySearch').valid),
       tap(() => {
         this.isLoading = true;
       }),
@@ -75,7 +75,7 @@ export class WeatherInfoPageComponent implements OnInit {
 
   initForm(): void {
     this.searchFromGroup = new FormGroup({
-      citySearch: new FormControl('')
+      citySearch: new FormControl('', [Validators.pattern('^[a-zA-Z ]*$')])
     });
   }
 
