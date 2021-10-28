@@ -48,6 +48,20 @@ mat-label{
     }
   }
 }
+mat-spinner{
+  height: 26px!important;
+  width: 26px!important;
+  position: absolute;
+  left: 0;
+  top: 40px;
+
+  svg{
+    height: 26px!important;
+    width: 26px!important;
+
+  }
+}
+
 .mat-form-field-wrapper{
   padding-bottom: 15px!important;
 }

@@ -50,10 +50,12 @@ export class WeatherInfoPageComponent implements OnInit {
       switchMap((val) => this.getCities(val)),
       tap(() => this.isLoading = false)
     ).subscribe((res: City[]) => {
+      this.isLoading = false;
       if (res) {
         this.citiesArray = res;
       }
     }, (err) => {
+      this.isLoading = false;
       this.utilsService.showSnackBar('An error occurred, please try again later.', '', 3000);
     });
     this.currentCitySub = this.store.select(getCurrentCityData).subscribe(currentCityData => {
@@ -75,7 +77,7 @@ export class WeatherInfoPageComponent implements OnInit {
 
   initForm(): void {
     this.searchFromGroup = new FormGroup({
-      citySearch: new FormControl('', [Validators.pattern('^[a-zA-Z ]*$')])
+      citySearch: new FormControl('', [Validators.pattern('^[A-Za-z0-9\\s!@#$%^&*()_+=-`~\\\\\\]\\[{}|\';:/.,?><]*$')])
     });
   }
 

@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 // Reducers
 import {weatherInfoReducer} from './pages/weather-info-page/state/weather-info.reducer';
@@ -67,7 +68,8 @@ import {appStateReducer} from './app-state/app-state.reducer';
     MatInputModule,
     MatCardModule,
     MatSnackBarModule,
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy}

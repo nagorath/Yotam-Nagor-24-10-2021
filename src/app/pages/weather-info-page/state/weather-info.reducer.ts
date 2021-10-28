@@ -15,7 +15,7 @@ export interface WeatherInfoState {
 }
 
 const InitialState: WeatherInfoState = {
-  accuWeatherApiKey: 'broNRKJfv28DCmqXbbSqJ8MoATK2vz3G',
+  accuWeatherApiKey: '8pDGSFuDVpHnYQsqqPCdp9M33iTQVOZA\n',
   currentCityData: null,
   currentCityName: '',
   futureForecast: null,

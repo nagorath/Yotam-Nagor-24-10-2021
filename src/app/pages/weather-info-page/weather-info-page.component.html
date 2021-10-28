@@ -5,6 +5,7 @@
       <mat-form-field appearance="fill" class="auto-complete-container">
         <mat-label [ngClass]="{'dark-mode': (isDarkMode$ | async)}">Search Location</mat-label>
         <input type="text" matInput formControlName="citySearch" [matAutocomplete]="auto">
+        <mat-spinner *ngIf="isLoading" [color]="!(isDarkMode$ | async) ? 'primary' : 'accent'"></mat-spinner>
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let city of citiesArray" [value]="city" (onSelectionChange)="onCitySelect(city.Key, city.LocalizedName)">
             {{city.LocalizedName}}, {{city.Country.LocalizedName}}
