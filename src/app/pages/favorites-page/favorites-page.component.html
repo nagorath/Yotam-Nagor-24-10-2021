@@ -1,16 +1,20 @@
 <div class="favorites-page-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">
   <div class="title-container">
-    <h1 [ngClass]="{'dark-mode': (isDarkMode$ | async)}">Favorites</h1>
+    <span class="title-text" [ngClass]="{'dark-mode': (isDarkMode$ | async)}">Favorites</span>
   </div>
-  <div class="is-celsius-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}" *ngIf="favoriteCities.length">
-    <span (click)="toggleIsCelsius(true)" [ngClass]="{'active': (isCelsius$ | async)}">°C</span>
-    <span>|</span>
-    <span (click)="toggleIsCelsius(false)" [ngClass]="{'active': !(isCelsius$ | async)}">°F</span>
+  <div class="no-fav-cities-text" *ngIf="!favoriteCities.length">
+    <span class="no-fav-text">No favorite cities were chosen.</span>
   </div>
-  <div class="favorite-cities-container">
-    <span class="no-fav-text" *ngIf="!favoriteCities.length">No favorite cities were chosen.</span>
-    <div *ngFor="let city of favoriteCities">
-      <app-favorite-city-card [cityId]="city.id" [cityName]="city.name"></app-favorite-city-card>
+  <div class="favorite-cities-container card-design" [ngClass]="{'dark-mode': (isDarkMode$ | async)}" *ngIf="favoriteCities.length">
+    <div class="is-celsius-container" [ngClass]="{'dark-mode': (isDarkMode$ | async)}" *ngIf="favoriteCities.length">
+      <span (click)="toggleIsCelsius(true)" [ngClass]="{'active': (isCelsius$ | async)}">°C</span>
+      <span>|</span>
+      <span (click)="toggleIsCelsius(false)" [ngClass]="{'active': !(isCelsius$ | async)}">°F</span>
+    </div>
+    <div class="favorite-cities-cards-container">
+      <div *ngFor="let city of favoriteCities">
+        <app-favorite-city-card [cityId]="city.id" [cityName]="city.name"></app-favorite-city-card>
+      </div>
     </div>
   </div>
 </div>

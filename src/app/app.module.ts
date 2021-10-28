@@ -11,7 +11,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
-
+// Loader UI
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 // Components
 import { WeatherInfoPageComponent } from './pages/weather-info-page/weather-info-page.component';
@@ -65,7 +66,8 @@ import {appStateReducer} from './app-state/app-state.reducer';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxUiLoaderModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy}

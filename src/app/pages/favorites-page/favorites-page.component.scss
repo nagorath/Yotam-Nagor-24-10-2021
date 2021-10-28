@@ -5,39 +5,66 @@
   padding: 50px 100px;
   height: calc(100vh - 48px);
   transition: ease-out 0.2s;
+  color: black;
   &.dark-mode{
     background-color: #303030;
+    color: white;
   }
   .title-container{
     margin-bottom: 20px;
-  }
-  .is-celsius-container{
-    width: 100%;
-    text-align: end;
-    padding-right: 50px;
-    span{
-      margin-left: 10px;
-      font-size: 22px;
-      cursor: pointer;
-      &.active{
-        font-weight: 700;
-      }
+    .title-text{
+      font-weight: 300;
+      font-size: 35px;
     }
   }
-  .favorite-cities-container{
-    min-width: 100%;
-    padding: 0 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  .no-fav-cities-text{
     text-align: center;
+    width: 100%;
+    margin-bottom: 14px;
     .no-fav-text{
       text-align: center;
       font-size: 28px;
       font-weight: 100;
     }
   }
+  .favorite-cities-container{
+    min-width: 100%;
+    max-width: 100%;
+    padding: 24px 30px 10px 30px;
+    //display: flex;
+    //flex-direction: row;
+    //flex-wrap: wrap;
+    //text-align: center;
+    //justify-content: space-evenly;
+
+    .is-celsius-container{
+      width: 100%;
+      text-align: end;
+      padding-right: 24px;
+      margin-bottom: 20px;
+      span{
+        margin-left: 10px;
+        font-size: 22px;
+        cursor: pointer;
+        &.active{
+          font-weight: 700;
+        }
+      }
+    }
+    .favorite-cities-cards-container{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      justify-items: center;
+      gap: 10px;
+    }
+  }
 }
+
+//@media (max-width: 1600px) {
+//  .favorite-cities-container {
+//    grid-template-columns: auto auto auto auto auto auto auto;
+//  }
+//}
 
 @media (max-width: 850px) {
   .favorites-page-container {
@@ -46,6 +73,12 @@
       padding: 0px;
       margin-bottom: 40px;
     }
+  }
+}
+
+@media (max-width: 740px) {
+  .is-celsius-container{
+    text-align: center !important;
   }
 }
 

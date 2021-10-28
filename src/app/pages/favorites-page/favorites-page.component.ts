@@ -28,6 +28,8 @@ export class FavoritesPageComponent implements OnInit {
     });
   }
 
+
+
   toggleIsCelsius(isCelsius: boolean): void {
     this.store.dispatch(WeatherInfoActions.toggleIsCelsius({isCelsius}));
   }

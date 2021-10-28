@@ -93,6 +93,7 @@ export class WeatherInfoPageComponent implements OnInit {
   }
 
   getCityByCurrentLocation(lat: number, lon: number): void {
+    this.utilsService.showLoader();
     let apiKey = '';
     let cityKey = '';
     let cityName = '';
@@ -103,6 +104,9 @@ export class WeatherInfoPageComponent implements OnInit {
       cityKey = res.Key;
       cityName = res.LocalizedName;
       this.onCitySelect(cityKey, cityName);
+    }, err => {
+      this.utilsService.hideLoader();
+      this.utilsService.showSnackBar('An error occurred, please try again later.', '', 3000);
     });
   }
 
@@ -115,6 +119,7 @@ export class WeatherInfoPageComponent implements OnInit {
   }
 
   onCitySelect(cityKey: string, cityName: string): void {
+    this.utilsService.showLoader();
     let apiKey = '';
     let isCelsius: boolean;
     this.apiKey$.subscribe(key => {
@@ -133,10 +138,14 @@ export class WeatherInfoPageComponent implements OnInit {
       this.store.dispatch(WeatherInfoActions.setCurrentCityData({currentCityData: parsedRes}));
       this.store.dispatch(WeatherInfoActions.setCurrentCityName({currentCityName: cityName}));
     }, err => {
+      this.utilsService.showSnackBar('An error occurred, please try again later.', '', 3000);
+      this.utilsService.hideLoader();
     });
     this.dataService.getFutureForecast(apiKey, cityKey, isCelsius).subscribe((res) => {
         this.store.dispatch(WeatherInfoActions.setCurrentCityFutureForecast({futureForecast: res['DailyForecasts']}));
+        this.utilsService.hideLoader();
     }, err => {
+      this.utilsService.hideLoader();
       this.utilsService.showSnackBar('An error occurred, please try again later.', '', 3000);
     });
   }

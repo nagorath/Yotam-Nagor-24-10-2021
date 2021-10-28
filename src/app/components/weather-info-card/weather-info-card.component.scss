@@ -116,15 +116,48 @@
     }
   }
 }
-@media (max-width: 1320px) {
-  .future-days-forecast-container {
-    padding: 0 90px;
-  }
-}
+//@media (max-width: 1320px) {
+//  .future-days-forecast-container {
+//    padding: 0 90px;
+//  }
+//}
+//
+//@media (max-width: 1320px) {
+//  .future-days-forecast-container {
+//    padding: 0 120px;
+//  }
+//}
 
-@media (max-width: 1320px) {
-  .future-days-forecast-container {
-    padding: 0 120px;
+@media (max-width: 1150px) {
+  .city-temp-contianer{
+    flex-direction: column!important;
+    align-items: center!important;
+    span{
+      margin-right: 0px!important;
+    }
+  }
+  .card-header-container{
+    flex-direction: column;
+    justify-content: unset;
+    align-items: center;
+    height: 100%;
+  }
+  .city-info-container{
+    flex-direction: column;
+    padding-left: 0!important;
+    .weather-img-container{
+      height: 175px!important;
+      img {
+        top: 0px!important;
+        left: 0px!important;
+      }
+    }
+  }
+  .card-content-container{
+    margin-top: 100px;
+  }
+  .weather-details-text-container{
+    height: 220px!important;
   }
 }
 

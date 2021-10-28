@@ -20,9 +20,6 @@ body {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   direction: ltr;
-  &.dark-mode{
-    color: white;
-  }
 }
 
 mat-label{

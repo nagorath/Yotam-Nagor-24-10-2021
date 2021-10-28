@@ -39,6 +39,7 @@ export class FavoriteCityCardComponent implements OnInit {
   }
 
   getCityData(): Subscription {
+    this.utilsService.showLoader();
     let apiKey = '';
     this.apiKey$.subscribe(key => {
       apiKey = key;
@@ -52,7 +53,9 @@ export class FavoriteCityCardComponent implements OnInit {
       };
       this.cardData = parsedRes;
       this.getWeatherIcon(res[0].WeatherIcon);
+      this.utilsService.hideLoader();
     }, error => {
+      this.utilsService.hideLoader();
       this.utilsService.showSnackBar('An error occurred, please try again later.', '', 3000);
     });
   }
@@ -67,6 +70,7 @@ export class FavoriteCityCardComponent implements OnInit {
   }
 
   onCardClick(): void {
+    this.utilsService.showLoader();
     this.router.navigate(['/weather']);
     let apiKey = '';
     let isCelsius: boolean;
@@ -86,10 +90,14 @@ export class FavoriteCityCardComponent implements OnInit {
       this.store.dispatch(WeatherInfoActions.setCurrentCityData({currentCityData: parsedRes}));
       this.store.dispatch(WeatherInfoActions.setCurrentCityName({currentCityName: this.cityName}));
     }, err => {
+      this.utilsService.hideLoader();
+      this.utilsService.showSnackBar('An error occurred, please try again later.', '', 3000);
     });
     this.dataService.getFutureForecast(apiKey, this.cityId, isCelsius).subscribe((res: FutureForecast[]) => {
       this.store.dispatch(WeatherInfoActions.setCurrentCityFutureForecast({futureForecast: res['DailyForecasts']}));
+      this.utilsService.hideLoader();
     }, error => {
+      this.utilsService.hideLoader();
       this.utilsService.showSnackBar('An error occurred, please try again later.', '', 3000);
     });
   }

@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    private ngxLoader: NgxUiLoaderService
+  ) {}
+
+  showLoader(): void {
+    this.ngxLoader.start();
+  }
+
+  hideLoader(): void {
+    this.ngxLoader.stop();
+  }
 
   showSnackBar(msg: string, action: string, duration: number): void {
     this.snackBar.open(msg, action, {
