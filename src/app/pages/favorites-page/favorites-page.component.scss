@@ -83,7 +83,8 @@
 }
 
 @media (max-width: 450px) {
-  favorite-cities-container{
+  .favorite-cities-container{
     justify-content: center;
+    min-width: 300px!important;
   }
 }
